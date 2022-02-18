@@ -4,6 +4,7 @@
 
 
 using System.Text;
+using System.Text.Json;
 using RabbitMQ.Client;
 
 //RabbitMQ();
@@ -128,7 +129,17 @@ static void HeaderExchange()
     properties.Headers = headers;
     properties.Persistent = true; // Mesajlar kalıcı hale geldi.
 
-    var messageBody = Encoding.UTF8.GetBytes("header mesajım");
+    var product = new Product
+    {
+        Id = 1,
+        Name = "Kalem",
+        Price = 10,
+        Stock = 50
+    };
+
+    var productJsonString = JsonSerializer.Serialize(product);
+
+    var messageBody = Encoding.UTF8.GetBytes(productJsonString);
 
     channel.BasicPublish("header-exchange", string.Empty, properties, messageBody);
 
@@ -141,4 +152,12 @@ public enum LogName
     Error = 2,
     Warning = 3,
     Info = 4
+}
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int Stock { get; set; }
 }

@@ -3,6 +3,7 @@
 // See https://aka.ms/new-console-template for more information
 
 using System.Text;
+using System.Text.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -165,11 +166,19 @@ static void HeaderExchange()
     consumer.Received += (sender, e) =>
     {
         var message = Encoding.UTF8.GetString(e.Body.ToArray());
+        var product = JsonSerializer.Deserialize<Product>(message);
         Thread.Sleep(1500);
-        Console.WriteLine("Gelen Log:" + message);
+        Console.WriteLine("Gelen Mesaj:" + product.Name);
         channel.BasicAck(e.DeliveryTag, false);
     };
 
     Console.ReadLine();
 }
 
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int Stock { get; set; }
+}
