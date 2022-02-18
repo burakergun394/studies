@@ -8,7 +8,8 @@ using RabbitMQ.Client;
 
 //RabbitMQ();
 //FanoutExchange();
-DirectExchange();
+//DirectExchange();
+TopicExchange();
 
 static IConnection CreateConnection()
 {
@@ -82,6 +83,30 @@ static void DirectExchange()
         var routeKey = $"route-{log}";
 
         channel.BasicPublish("logs-direct", routeKey, null, messageBody);
+
+        Console.WriteLine($"Log gönderilmiştir : {message}");
+    });
+}
+
+static void TopicExchange()
+{
+    using var connection = CreateConnection();
+    using var channel = connection.CreateModel();
+
+    channel.ExchangeDeclare(exchange: "logs-topic", durable: true, type: ExchangeType.Topic);
+
+    Enumerable.Range(1, 50).ToList().ForEach(x =>
+    {
+        LogName log1 = (LogName)new Random().Next(1, 5);
+        LogName log2 = (LogName)new Random().Next(1, 5);
+        LogName log3 = (LogName)new Random().Next(1, 5);
+
+        var routeKey = $"{log1}.{log2}.{log3}";
+
+        var message = $"log type: {log1}-{log2}-{log3}-{x}";
+        var messageBody = Encoding.UTF8.GetBytes(message);
+
+        channel.BasicPublish("logs-topic", routeKey, null, messageBody);
 
         Console.WriteLine($"Log gönderilmiştir : {message}");
     });

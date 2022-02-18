@@ -8,8 +8,8 @@ using RabbitMQ.Client.Events;
 
 //RabbitMQ();
 //FanoutExchange();
-DirectExchange();
-
+//DirectExchange();
+TopicExchange();
 
 static IConnection CreateConnection()
 {
@@ -92,6 +92,38 @@ static void DirectExchange()
     var consumer = new EventingBasicConsumer(channel);
 
     var queueName = "direct-queue-Critical";
+    channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
+    Console.WriteLine("Loglar dinleniyor...");
+
+    consumer.Received += (sender, e) =>
+    {
+        var message = Encoding.UTF8.GetString(e.Body.ToArray());
+        Thread.Sleep(1500);
+        Console.WriteLine("Gelen Log:" + message);
+        //File.AppendAllText("log-critical.txt", message + "\n");
+        channel.BasicAck(e.DeliveryTag, false);
+    };
+
+    Console.ReadLine();
+}
+
+static void TopicExchange()
+{
+    var connection = CreateConnection();
+    var channel = connection.CreateModel();
+
+    channel.BasicQos(0, 1, false);
+    var consumer = new EventingBasicConsumer(channel);
+
+    var queueName = channel.QueueDeclare().QueueName;
+
+    //var routeKey = "*.Error.*";
+    //var routeKey = "*.*.Warning";
+    var routeKey = "Info.#";
+
+
+    channel.QueueBind(queueName, "logs-topic", routeKey, null);
+
     channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
     Console.WriteLine("Loglar dinleniyor...");
 
