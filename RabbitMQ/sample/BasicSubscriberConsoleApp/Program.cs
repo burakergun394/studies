@@ -9,7 +9,9 @@ using RabbitMQ.Client.Events;
 //RabbitMQ();
 //FanoutExchange();
 //DirectExchange();
-TopicExchange();
+//TopicExchange();
+HeaderExchange();
+
 
 static IConnection CreateConnection()
 {
@@ -138,3 +140,36 @@ static void TopicExchange()
 
     Console.ReadLine();
 }
+
+static void HeaderExchange()
+{
+    var connection = CreateConnection();
+    var channel = connection.CreateModel();
+
+    channel.BasicQos(0, 1, false);
+    var consumer = new EventingBasicConsumer(channel);
+
+    var queueName = channel.QueueDeclare().QueueName;
+
+    Dictionary<string, object> headers = new Dictionary<string, object>();
+    headers.Add("format", "pdf");
+    headers.Add("shape", "a4");
+    //headers.Add("x-match", "all");
+    headers.Add("x-match", "any");
+
+    channel.QueueBind(queueName, "header-exchange", string.Empty, headers);
+
+    channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
+    Console.WriteLine("Dinleniyor...");
+
+    consumer.Received += (sender, e) =>
+    {
+        var message = Encoding.UTF8.GetString(e.Body.ToArray());
+        Thread.Sleep(1500);
+        Console.WriteLine("Gelen Log:" + message);
+        channel.BasicAck(e.DeliveryTag, false);
+    };
+
+    Console.ReadLine();
+}
+

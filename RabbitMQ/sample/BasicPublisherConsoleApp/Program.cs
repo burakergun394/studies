@@ -9,7 +9,8 @@ using RabbitMQ.Client;
 //RabbitMQ();
 //FanoutExchange();
 //DirectExchange();
-TopicExchange();
+//TopicExchange();
+HeaderExchange();
 
 static IConnection CreateConnection()
 {
@@ -110,6 +111,27 @@ static void TopicExchange()
 
         Console.WriteLine($"Log gönderilmiştir : {message}");
     });
+}
+
+static void HeaderExchange()
+{
+    using var connection = CreateConnection();
+    using var channel = connection.CreateModel();
+
+    channel.ExchangeDeclare(exchange: "header-exchange", durable: true, type: ExchangeType.Headers);
+
+    Dictionary<string, object> headers = new Dictionary<string, object>();
+    headers.Add("format", "pdf");
+    headers.Add("shape2", "a4");
+
+    var properties = channel.CreateBasicProperties();
+    properties.Headers = headers;
+
+    var messageBody = Encoding.UTF8.GetBytes("header mesajım");
+
+    channel.BasicPublish("header-exchange", string.Empty, properties, messageBody);
+
+    Console.WriteLine("Mesaj gönderilmiştir.");
 }
 
 public enum LogName
