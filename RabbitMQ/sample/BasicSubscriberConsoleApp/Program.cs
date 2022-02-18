@@ -85,5 +85,24 @@ static void FanoutExchange()
 
 static void DirectExchange()
 {
+    var connection = CreateConnection();
+    var channel = connection.CreateModel();
 
+    channel.BasicQos(0, 1, false);
+    var consumer = new EventingBasicConsumer(channel);
+
+    var queueName = "direct-queue-Critical";
+    channel.BasicConsume(queue: queueName, autoAck: false, consumer: consumer);
+    Console.WriteLine("Loglar dinleniyor...");
+
+    consumer.Received += (sender, e) =>
+    {
+        var message = Encoding.UTF8.GetString(e.Body.ToArray());
+        Thread.Sleep(1500);
+        Console.WriteLine("Gelen Log:" + message);
+        //File.AppendAllText("log-critical.txt", message + "\n");
+        channel.BasicAck(e.DeliveryTag, false);
+    };
+
+    Console.ReadLine();
 }

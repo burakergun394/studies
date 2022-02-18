@@ -61,5 +61,36 @@ static void FanoutExchange()
 
 static void DirectExchange()
 {
+    using var connection = CreateConnection();
+    using var channel = connection.CreateModel();
 
+    channel.ExchangeDeclare(exchange: "logs-direct", durable: true, type: ExchangeType.Direct);
+
+    Enum.GetNames(typeof(LogName)).ToList().ForEach(x =>
+    {
+        var routeKey = $"route-{x}";
+        var queueName = $"direct-queue-{x}";
+        channel.QueueDeclare(queueName, true, false, false);
+        channel.QueueBind(queueName, "logs-direct", routeKey, null);
+    });
+
+    Enumerable.Range(1, 50).ToList().ForEach(x =>
+    {
+        LogName log = (LogName)new Random().Next(1, 5);
+        var message = $"log type: {log}-{x}";
+        var messageBody = Encoding.UTF8.GetBytes(message);
+        var routeKey = $"route-{log}";
+
+        channel.BasicPublish("logs-direct", routeKey, null, messageBody);
+
+        Console.WriteLine($"Log gönderilmiştir : {message}");
+    });
+}
+
+public enum LogName
+{
+    Critical = 1,
+    Error = 2,
+    Warning = 3,
+    Info = 4
 }
