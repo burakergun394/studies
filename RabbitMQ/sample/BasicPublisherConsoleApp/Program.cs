@@ -21,12 +21,15 @@ static void RabbitMQ()
     // durable false ise memory üzerinde tutulduğu rabbit mq restart atıldıgında kuyruktaki mesajlar silinir, true ise fiziksel olarak kaydedildiği için rabbit mq restart atılsa da kuyruktaki mesajlar silinmez.
     // exclusive true yaparsak, sadece buradaki kanal üzerinden ulaşılır, false yaparsak farklı kanallardan erişilir
     // autoDelete false yaparsak, subscriber gittiği an kuyruk gitmesin, true yaparsak kuyruk yok olur.
-    channel.QueueDeclare(queue:"hello-queue", durable:true, exclusive:false, autoDelete: false);
+    channel.QueueDeclare(queue: "hello-queue", durable: true, exclusive: false, autoDelete: false);
 
-    var message = "hello world";
-    var messageBody = Encoding.UTF8.GetBytes(message);
+    Enumerable.Range(1, 50).ToList().ForEach(x =>
+     {
+         var message = $"Message {x}";
+         var messageBody = Encoding.UTF8.GetBytes(message);
 
-    channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
-    
-    Console.WriteLine("Mesaj gönderilmiştir.");
+         channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
+
+         Console.WriteLine($"Mesaj gönderilmiştir : {message}");
+     });
 }
