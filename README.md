@@ -11,12 +11,9 @@
        - ...
 
   ## Hello World
-     - Publisher(Producer) ve Subscriber(Consumer) adlı 2 farklı console uygulaması kurunuz
      - RabbitMQ.Client kütüphanesini nuget üzerinden indiriniz
-
      - Publisher   
-       static void RabbitMQ()
-       {
+      ```csharp
            var factory = new ConnectionFactory
            {
                Uri = new Uri("amqps://rnehppre:qhOPBA8pUBfGI1l9VXug3himt7ApTbu5@toad.rmq.cloudamqp.com/rnehppre")
@@ -36,11 +33,9 @@
             channel.BasicPublish(string.Empty, "hello-queue", null, messageBody);
             
             Console.WriteLine("Mesaj gönderilmiştir.");
-        }
-        
-      - Subscriber
-        static void RabbitMQ()
-        {
+       ```csharp 
+     - Subscriber
+       ```csharp
             var factory = new ConnectionFactory
             {
                 Uri = new Uri("amqps://rnehppre:qhOPBA8pUBfGI1l9VXug3himt7ApTbu5@toad.rmq.cloudamqp.com/rnehppre")
@@ -68,5 +63,4 @@
             };
         
             //consumer.Received += ConsumerOnReceived;
-        }
-        
+        ```csharp
