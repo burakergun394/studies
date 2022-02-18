@@ -126,6 +126,7 @@ static void HeaderExchange()
 
     var properties = channel.CreateBasicProperties();
     properties.Headers = headers;
+    properties.Persistent = true; // Mesajlar kalıcı hale geldi.
 
     var messageBody = Encoding.UTF8.GetBytes("header mesajım");
 
