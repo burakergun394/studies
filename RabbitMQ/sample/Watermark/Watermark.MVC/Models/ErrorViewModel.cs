@@ -1,0 +1,21 @@
+using Microsoft.EntityFrameworkCore;
+
+namespace Watermark.MVC.Models
+{
+    public class ErrorViewModel
+    {
+        public string? RequestId { get; set; }
+
+        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+    }
+
+    public class AppDbContext : DbContext
+    {
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        {
+
+        }
+
+        public DbSet<Product> Products { get; set; }
+    }
+}

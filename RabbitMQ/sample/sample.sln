@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicPublisherConsoleApp", "BasicPublisherConsoleApp\BasicPublisherConsoleApp.csproj", "{E97B62C2-15EC-4D49-B3EE-31757F2D03E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicPublisherConsoleApp", "BasicPublisherConsoleApp\BasicPublisherConsoleApp.csproj", "{E97B62C2-15EC-4D49-B3EE-31757F2D03E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicSubscriberConsoleApp", "BasicSubscriberConsoleApp\BasicSubscriberConsoleApp.csproj", "{8F4D1B3D-1A3D-405B-A164-2A58D0BEB3DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicSubscriberConsoleApp", "BasicSubscriberConsoleApp\BasicSubscriberConsoleApp.csproj", "{8F4D1B3D-1A3D-405B-A164-2A58D0BEB3DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Watermark", "Watermark", "{4546AE7C-95CD-41C0-8581-B843AB51448E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watermark.MVC", "Watermark\Watermark.MVC\Watermark.MVC.csproj", "{7EACACEE-C34E-4B2A-A90E-944017954DA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,9 +25,16 @@ Global
 		{8F4D1B3D-1A3D-405B-A164-2A58D0BEB3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F4D1B3D-1A3D-405B-A164-2A58D0BEB3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F4D1B3D-1A3D-405B-A164-2A58D0BEB3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7EACACEE-C34E-4B2A-A90E-944017954DA6} = {4546AE7C-95CD-41C0-8581-B843AB51448E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CA9D5E5-5ED5-44C4-B43D-0DDAD874740C}
