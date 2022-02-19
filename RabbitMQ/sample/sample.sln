@@ -9,7 +9,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasicSubscriberConsoleApp",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Watermark", "Watermark", "{4546AE7C-95CD-41C0-8581-B843AB51448E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Watermark.MVC", "Watermark\Watermark.MVC\Watermark.MVC.csproj", "{7EACACEE-C34E-4B2A-A90E-944017954DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Watermark.MVC", "Watermark\Watermark.MVC\Watermark.MVC.csproj", "{7EACACEE-C34E-4B2A-A90E-944017954DA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Excel", "Excel", "{9017142C-6C62-4266-8C2D-B4E27FB5F355}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel.MVC", "Excel\Excel.MVC\Excel.MVC.csproj", "{A2A8447B-CDC7-4813-A63F-7F91D0E47C23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{CC65272C-6E88-4BB8-99FD-BB11D793ED2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel.FileCreateWorkerService", "Excel\Excel.FileCreateWorkerService\Excel.FileCreateWorkerService.csproj", "{2BC382F2-BD8B-449A-97A0-D281C534A5B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +37,26 @@ Global
 		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7EACACEE-C34E-4B2A-A90E-944017954DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A8447B-CDC7-4813-A63F-7F91D0E47C23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A8447B-CDC7-4813-A63F-7F91D0E47C23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A8447B-CDC7-4813-A63F-7F91D0E47C23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A8447B-CDC7-4813-A63F-7F91D0E47C23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC65272C-6E88-4BB8-99FD-BB11D793ED2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC65272C-6E88-4BB8-99FD-BB11D793ED2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC65272C-6E88-4BB8-99FD-BB11D793ED2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC65272C-6E88-4BB8-99FD-BB11D793ED2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BC382F2-BD8B-449A-97A0-D281C534A5B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BC382F2-BD8B-449A-97A0-D281C534A5B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BC382F2-BD8B-449A-97A0-D281C534A5B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BC382F2-BD8B-449A-97A0-D281C534A5B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7EACACEE-C34E-4B2A-A90E-944017954DA6} = {4546AE7C-95CD-41C0-8581-B843AB51448E}
+		{A2A8447B-CDC7-4813-A63F-7F91D0E47C23} = {9017142C-6C62-4266-8C2D-B4E27FB5F355}
+		{2BC382F2-BD8B-449A-97A0-D281C534A5B5} = {9017142C-6C62-4266-8C2D-B4E27FB5F355}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8CA9D5E5-5ED5-44C4-B43D-0DDAD874740C}
