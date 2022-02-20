@@ -23,15 +23,15 @@ public class RabbitMqClientService : IRabbitMqClientService, IDisposable
 
         _channel.ExchangeDeclare(
             exchange: _rabbitMqSettings.ExchangeName,
-            type: ExchangeType.Direct,
-            durable: true,
-            autoDelete: false);
+            type: GetExchangeType(),
+            durable: _rabbitMqSettings.Durable,
+            autoDelete: _rabbitMqSettings.AutoDelete);
 
         _channel.QueueDeclare(
             _rabbitMqSettings.QueueName,
-            durable: true,
-            autoDelete: false,
-            exclusive: false);
+            durable: _rabbitMqSettings.Durable,
+            autoDelete: _rabbitMqSettings.AutoDelete,
+            exclusive: _rabbitMqSettings.AutoDelete);
 
         _channel.QueueBind(
             queue: _rabbitMqSettings.QueueName,
@@ -66,6 +66,18 @@ public class RabbitMqClientService : IRabbitMqClientService, IDisposable
             return;
 
         _connection = _connectionFactory.CreateConnection();
+    }
+
+    private string GetExchangeType()
+    {
+        return _rabbitMqSettings.ExchangeType switch
+        {
+            RabbitMqExchangeType.Direct => ExchangeType.Direct,
+            RabbitMqExchangeType.Fanout => ExchangeType.Fanout,
+            RabbitMqExchangeType.Headers => ExchangeType.Headers,
+            RabbitMqExchangeType.Topic => ExchangeType.Topic,
+            _ => throw new Exception("ExchangeType unknown")
+        };
     }
 
     public void Dispose()
