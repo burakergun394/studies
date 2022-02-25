@@ -4,8 +4,12 @@ import { ListGroup, ListGroupItem } from "reactstrap";
 export default class CategoryList extends Component {
   constructor(props) {
     super(props);
-    state: {
-    }
+    this.state = {
+      categories: [
+        { categoryId: 1, categoryName: "Beverages" },
+        { categoryId: 2, categoryName: "Condiments" },
+      ],
+    };
   }
 
   render() {
@@ -13,21 +17,13 @@ export default class CategoryList extends Component {
       <div>
         <h3>{this.props.info.title}</h3>
         <ListGroup>
-          <ListGroupItem action href="#" tag="a">
-            Cras justo odio
-          </ListGroupItem>
-          <ListGroupItem action href="#" tag="a">
-            Dapibus ac facilisis in
-          </ListGroupItem>
-          <ListGroupItem action href="#" tag="a">
-            Morbi leo risus
-          </ListGroupItem>
-          <ListGroupItem action href="#" tag="a">
-            Porta ac consectetur ac
-          </ListGroupItem>
-          <ListGroupItem action href="#" tag="a">
-            Vestibulum at eros
-          </ListGroupItem>
+          {this.state.categories.map((category) => {
+            return (
+              <ListGroupItem key={category.categoryId}>
+                {category.categoryName}
+              </ListGroupItem>
+            );
+          })}
         </ListGroup>
       </div>
     );
