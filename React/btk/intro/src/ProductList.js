@@ -7,6 +7,10 @@ export default class ProductList extends Component {
     }
   }
   render() {
-    return <div>{this.props.info.title}</div>;
+    return (
+      <div>
+        {this.props.info.title}-{this.props.currentCategory}
+      </div>
+    );
   }
 }

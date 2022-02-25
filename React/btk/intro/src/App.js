@@ -9,7 +9,14 @@ export default class App extends Component {
     super(props);
     this.categoryInfo = { title: "CategoryList" };
     this.productInfo = { title: "ProductList" };
+    this.state = {
+      currentCategory: "",
+    };
   }
+
+  changeCategory = (categoryName) => {
+    this.setState({ currentCategory: categoryName });
+  };
 
   render() {
     return (
@@ -20,10 +27,17 @@ export default class App extends Component {
           </Row>
           <Row>
             <Col xs="3">
-              <CategoryList info={this.categoryInfo}></CategoryList>
+              <CategoryList
+                info={this.categoryInfo}
+                currentCategory={this.state.currentCategory}
+                changeCategory={this.changeCategory}
+              />
             </Col>
             <Col xs="9">
-              <ProductList info={this.productInfo}></ProductList>
+              <ProductList
+                info={this.productInfo}
+                currentCategory={this.state.currentCategory}
+              />
             </Col>
           </Row>
         </Container>
