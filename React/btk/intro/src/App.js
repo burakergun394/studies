@@ -5,6 +5,12 @@ import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.categoryInfo = { title: "CategoryList" };
+    this.productInfo = { title: "ProductList" };
+  }
+
   render() {
     return (
       <div className="App">
@@ -14,10 +20,10 @@ export default class App extends Component {
           </Row>
           <Row>
             <Col xs="3">
-              <CategoryList title="Category List"></CategoryList>
+              <CategoryList info={this.categoryInfo}></CategoryList>
             </Col>
             <Col xs="9">
-              <ProductList title="Product List"></ProductList>
+              <ProductList info={this.productInfo}></ProductList>
             </Col>
           </Row>
         </Container>

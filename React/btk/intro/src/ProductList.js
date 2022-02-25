@@ -7,6 +7,6 @@ export default class ProductList extends Component {
     }
   }
   render() {
-    return <div>{this.props.title}</div>;
+    return <div>{this.props.info.title}</div>;
   }
 }
