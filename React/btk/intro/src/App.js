@@ -10,12 +10,38 @@ export default class App extends Component {
     this.categoryInfo = { title: "CategoryList" };
     this.productInfo = { title: "ProductList" };
     this.state = {
-      currentCategory: "",
+      currentCategoryId: "",
+      products: [],
     };
   }
 
-  changeCategory = (categoryName) => {
-    this.setState({ currentCategory: categoryName });
+  componentDidMount() {
+    this.getProducts();
+  }
+
+  changeCategory = (categoryId) => {
+    this.setState({ currentCategoryId: categoryId });
+    this.getProductsByCategoryId(categoryId);
+  };
+
+  getProducts = () => {
+    fetch(`http://localhost:3000/products`)
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          products: data,
+        })
+      );
+  };
+
+  getProductsByCategoryId = (categoryId) => {
+    fetch(`http://localhost:3000/products?categoryId=${categoryId}`)
+      .then((response) => response.json())
+      .then((data) =>
+        this.setState({
+          products: data,
+        })
+      );
   };
 
   render() {
@@ -29,14 +55,14 @@ export default class App extends Component {
             <Col xs="3">
               <CategoryList
                 info={this.categoryInfo}
-                currentCategory={this.state.currentCategory}
+                currentCategoryId={this.state.currentCategoryId}
                 changeCategory={this.changeCategory}
               />
             </Col>
             <Col xs="9">
               <ProductList
                 info={this.productInfo}
-                currentCategory={this.state.currentCategory}
+                products={this.state.products}
               />
             </Col>
           </Row>
