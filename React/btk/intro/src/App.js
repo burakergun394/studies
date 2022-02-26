@@ -4,6 +4,9 @@ import Navi from "./Navi";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
 import alertify from "alertifyjs";
+import { Routes, Route } from "react-router-dom";
+import NotFound from "./NotFound";
+import CartList from "./CartList";
 
 export default class App extends Component {
   constructor(props) {
@@ -83,11 +86,21 @@ export default class App extends Component {
               />
             </Col>
             <Col xs="9">
-              <ProductList
-                info={this.productInfo}
-                products={this.state.products}
-                addToCart={this.addToCart}
-              />
+              <Routes>
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <ProductList
+                      info={this.productInfo}
+                      products={this.state.products}
+                      addToCart={this.addToCart}
+                    />
+                  }
+                />
+                <Route exact path="cart" element={<CartList />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
             </Col>
           </Row>
         </Container>
