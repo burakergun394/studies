@@ -67,6 +67,7 @@ export default class App extends Component {
       (cartItem) => cartItem.product.id !== product.id
     );
     this.setState({ cart: newCart });
+    alertify.error(`${product.productName} removed to cart`, 2);
   };
 
   render() {
@@ -98,7 +99,16 @@ export default class App extends Component {
                     />
                   }
                 />
-                <Route exact path="cart" element={<CartList />} />
+                <Route
+                  exact
+                  path="cart"
+                  element={
+                    <CartList
+                      cart={this.state.cart}
+                      removeFromCart={this.removeFromCart}
+                    />
+                  }
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Col>
