@@ -3,6 +3,7 @@ import { Container, Row, Col } from "reactstrap";
 import Navi from "./Navi";
 import CategoryList from "./CategoryList";
 import ProductList from "./ProductList";
+import alertify from "alertifyjs";
 
 export default class App extends Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class App extends Component {
     this.state = {
       currentCategoryId: "",
       products: [],
+      cart: [],
     };
   }
 
@@ -44,13 +46,34 @@ export default class App extends Component {
       );
   };
 
+  addToCart = (product) => {
+    let newCart = this.state.cart;
+    let addedItem = newCart.find((x) => x.product.id === product.id);
+    if (addedItem) {
+      addedItem.quantity += 1;
+    } else {
+      newCart.push({ product: product, quantity: 1 });
+    }
+    this.setState({ cart: newCart });
+
+    alertify.success(`${product.productName} added to cart`, 2);
+  };
+
+  removeFromCart = (product) => {
+    let newCart = this.state.cart.filter(
+      (cartItem) => cartItem.product.id !== product.id
+    );
+    this.setState({ cart: newCart });
+  };
+
   render() {
     return (
       <div className="App">
         <Container>
-          <Row>
-            <Navi></Navi>
-          </Row>
+          <Navi
+            cart={this.state.cart}
+            removeFromCart={this.removeFromCart}
+          ></Navi>
           <Row>
             <Col xs="3">
               <CategoryList
@@ -63,6 +86,7 @@ export default class App extends Component {
               <ProductList
                 info={this.productInfo}
                 products={this.state.products}
+                addToCart={this.addToCart}
               />
             </Col>
           </Row>

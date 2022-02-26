@@ -23,9 +23,8 @@ export default class CategoryList extends Component {
       );
   };
 
-  setCategoryActive = (categoryId) => {
-    return this.props.currentCategoryId === categoryId ? true : false;
-  };
+  setCategoryActive = (categoryId) =>
+    this.props.currentCategoryId === categoryId;
 
   render() {
     return (
