@@ -101,9 +101,7 @@ const SignUpForm = () => {
           onChange={handleChange}
           required
         />
-        <Button buttonType={BUTTON_TYPE_CLASSES.inverted} type="submit">
-          Sign Up
-        </Button>
+        <Button type="submit">Sign Up</Button>
       </form>
     </div>
   );

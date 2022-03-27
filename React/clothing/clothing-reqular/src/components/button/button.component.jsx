@@ -7,7 +7,10 @@ export const BUTTON_TYPE_CLASSES = {
 
 const Button = ({ children, buttonType, ...otherProps }) => {
   return (
-    <button className={`button-container ${buttonType}`} {...otherProps}>
+    <button
+      className={`button-container ${buttonType ? buttonType : ""}`}
+      {...otherProps}
+    >
       {children}
     </button>
   );
