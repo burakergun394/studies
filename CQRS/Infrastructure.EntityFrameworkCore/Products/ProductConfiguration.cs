@@ -20,8 +20,22 @@ namespace Infrastructure.EntityFrameworkCore.Products
             builder.Property(x => x.Name).IsRequired();
 
             builder.Property(x => x.CreatedTime);
-            
+
             builder.Property(x => x.UpdatedTime);
+
+            var products = new List<Product>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var product = new Product(
+                    $"P-{i + 1}",
+                    $"Product-{i + 1}");
+                product.Id = i + 1;
+                products.Add(product);
+                
+            }
+
+            builder.HasData(products);
         }
     }
 }

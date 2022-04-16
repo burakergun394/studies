@@ -8,7 +8,7 @@ namespace Domain.Repositories
         public T Update(T entity);
         public void Delete(T entity);
         public T Get(Func<T, bool> predicate);
-        public List<T> GetList(Func<T, bool> predicate);
+        public List<T> GetList(Func<T, bool> predicate = null);
 
     }
 }
