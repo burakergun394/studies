@@ -1,4 +1,6 @@
-﻿using Application.Products.Queries;
+﻿using Application.Products.Commands;
+using Application.Products.Dtos.Request;
+using Application.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +35,18 @@ namespace API.Controllers
         public async Task<IActionResult> GetAllProducts()
         {
             var result = await _mediator.Send(new GetAllProductsQuery());
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("create")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<IActionResult> Create(CreateProductRequest request)
+        {
+            var result = await _mediator.Send(new CreateProductCommand(request));
 
             return Ok(result);
         }

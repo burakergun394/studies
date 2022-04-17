@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Infrastructure.EntityFrameworkCore;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -9,6 +10,8 @@ namespace Application
         public static IServiceCollection AddAplicationServices(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddEntityFrameworkCoreServices();
 
             return services;
         }

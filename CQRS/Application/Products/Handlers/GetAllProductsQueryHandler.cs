@@ -1,5 +1,6 @@
 ﻿using Application.Products.Dtos.Response;
 using Application.Products.Queries;
+using AutoMapper;
 using Domain.Products;
 using MediatR;
 
@@ -10,14 +11,16 @@ namespace Application.Products.Handlers
         #region Fields
 
         private readonly IProductRepository _productRepository;
+        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public GetAllProductsQueryHandler(Domain.Products.IProductRepository productRepository)
+        public GetAllProductsQueryHandler(IProductRepository productRepository, IMapper mapper)
         {
             _productRepository = productRepository;
+            _mapper = mapper;
         }
 
         #endregion
@@ -30,17 +33,9 @@ namespace Application.Products.Handlers
 
             if (products.Count == 0)
                 throw new System.Exception("Products Not Found!");
+ 
 
-            var response = new List<GetAllProductsQueryResponse>();
-
-            products.ForEach(x => response.Add(new GetAllProductsQueryResponse
-            {
-                Id = x.Id,
-                Code = x.Code,
-                Name = x.Name,
-            }));
-
-            return response;
+            return _mapper.Map<List<GetAllProductsQueryResponse>>(products);
         }
 
         #endregion
