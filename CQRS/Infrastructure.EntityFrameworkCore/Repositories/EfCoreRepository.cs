@@ -24,9 +24,10 @@ namespace Infrastructure.EntityFrameworkCore.Repositories
 
         public TEntity Get(Func<TEntity, bool> predicate)
         {
-            return _context == null 
-                ? throw new ArgumentNullException("Context Is Null") 
-                : _context.Set<TEntity>().SingleOrDefault(predicate);
+            return _context == null
+                ? throw new ArgumentNullException("Context Is Null")
+                : _context.Set<TEntity>().AsNoTracking().SingleOrDefault(predicate);
+
         }
 
         public List<TEntity> GetList(Func<TEntity, bool> predicate = null)
@@ -46,11 +47,7 @@ namespace Infrastructure.EntityFrameworkCore.Repositories
 
         public TEntity Update(TEntity entity)
         {
-            var updatedEntity = _context.Entry(entity);
-
-            if (updatedEntity.State != EntityState.Detached)
-                updatedEntity.State = EntityState.Modified;
-
+            _context.Entry(entity).State = EntityState.Modified;
             _context.SaveChanges();
             return entity;
         }
