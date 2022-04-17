@@ -1,6 +1,7 @@
 ﻿using Application.Products.Dtos.Request;
 using Application.Products.Dtos.Response;
 using AutoMapper;
+using Domain.AggregateRoots;
 using Domain.Products;
 
 namespace Application.Products.Mappings.AutoMapper
@@ -13,10 +14,12 @@ namespace Application.Products.Mappings.AutoMapper
         {
             CreateMap<Product, GetAllProductsQueryResponse>();
 
-            CreateMap<CreateProductRequest, Product>();
             CreateMap<CreateProductRequest, Product>()
                 .ForMember(dest => dest.CreatedTime, src => src.MapFrom(prop => DateTime.Now));
             CreateMap<Product, CreateProductResponse>();
+
+            CreateMap<Product, UpdateProductResponse>();
+            CreateMap<Product, Product>();
         }
 
         #endregion

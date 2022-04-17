@@ -10,7 +10,7 @@
         public DateTime CreatedTime
         {
             get { return _createdTime; }
-            private set { _createdTime = DateTime.Now; }
+            private set { _createdTime = Id == 0 ? DateTime.Now : value; }
         }
         public Nullable<DateTime> UpdatedTime
         {

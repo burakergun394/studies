@@ -6,11 +6,19 @@ namespace Application.Products.Commands
 {
     public class CreateProductCommand: IRequest<CreateProductResponse>
     {
+        #region Fields
+
         public CreateProductRequest CreateProductRequest { get; set; }
+
+        #endregion
+
+        #region Constructors
 
         public CreateProductCommand(CreateProductRequest createProductRequest)
         {
             CreateProductRequest = createProductRequest;
         }
+
+        #endregion
     }
 }

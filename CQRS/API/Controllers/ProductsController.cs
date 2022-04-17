@@ -25,7 +25,6 @@ namespace API.Controllers
 
         #endregion
 
-
         #region Methods
 
         [HttpGet]
@@ -47,6 +46,30 @@ namespace API.Controllers
         public async Task<IActionResult> Create(CreateProductRequest request)
         {
             var result = await _mediator.Send(new CreateProductCommand(request));
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [Route("update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<IActionResult> Update(UpdateProductRequest request)
+        {
+            var result = await _mediator.Send(new UpdateProductCommand(request));
+
+            return Ok(result);
+        }
+
+        [HttpPost()]
+        [Route("delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _mediator.Send(new DeleteProductCommand(id));
 
             return Ok(result);
         }

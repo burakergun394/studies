@@ -47,7 +47,10 @@ namespace Infrastructure.EntityFrameworkCore.Repositories
         public TEntity Update(TEntity entity)
         {
             var updatedEntity = _context.Entry(entity);
-            updatedEntity.State = EntityState.Modified;
+
+            if (updatedEntity.State != EntityState.Detached)
+                updatedEntity.State = EntityState.Modified;
+
             _context.SaveChanges();
             return entity;
         }

@@ -15,7 +15,7 @@ namespace Infrastructure.EntityFrameworkCore
                 options.UseSqlServer("Data Source=DESKTOP-LKMPMHS;Initial Catalog=Burak;Integrated Security=True");
             });
 
-            services.AddScoped<IProductRepository, EfCoreProductRepository>();
+            services.AddTransient<IProductRepository, EfCoreProductRepository>();
 
             return services;
         }
