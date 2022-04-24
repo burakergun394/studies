@@ -1,4 +1,6 @@
-﻿using Infrastructure.EntityFrameworkCore;
+﻿using Core.CrossCuttinnConcerns.Caching;
+using Core.CrossCuttinnConcerns.Caching.Microsoft;
+using Infrastructure.EntityFrameworkCore;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -11,7 +13,9 @@ namespace Application
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddSingleton<ICache, MicrosoftMemoryCache>();
             services.AddEntityFrameworkCoreServices();
+
 
             return services;
         }

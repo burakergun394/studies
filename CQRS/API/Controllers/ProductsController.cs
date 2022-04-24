@@ -1,9 +1,11 @@
 ﻿using Application.Products.Commands;
 using Application.Products.Dtos.Request;
+using Application.Products.Dtos.Response;
 using Application.Products.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace API.Controllers
 {
@@ -14,13 +16,15 @@ namespace API.Controllers
         #region Fields
 
         private readonly IMediator _mediator;
+        private readonly IMemoryCache _memoryCache;
 
         #endregion
 
         #region Constructor
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator, IMemoryCache memoryCache)
         {
             _mediator = mediator;
+            _memoryCache = memoryCache;
         }
 
         #endregion
@@ -46,6 +50,8 @@ namespace API.Controllers
         public async Task<IActionResult> Create(CreateProductRequest request)
         {
             var result = await _mediator.Send(new CreateProductCommand(request));
+
+            _memoryCache.Remove("get-all-products");
 
             return Ok(result);
         }
