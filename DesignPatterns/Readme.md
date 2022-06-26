@@ -1,16 +1,15 @@
-## Yaratýcý Tasarým Desenleri
-### Abstract Factory
-- Soyut Fabrika tasarým deseni, somut sýnýflarýný belirtmeden ilgili veya baðýmlý nesnelerin ailelerini oluþturmak için bir arayüz saðlar.
-### Builder
-- Oluþturucu tasarým deseni, ayný yapým sürecinin farklý temsiller oluþturabilmesi için karmaþýk bir nesnenin yapýmýný temsilinden ayýrýr.
-### Factory Method
-- Fabrika Yöntemi tasarým deseni, bir nesne oluþturmak için bir arabirim tanýmlar, ancak alt sýnýflarýn hangi sýnýfýn baþlatýlacaðýna karar vermesine izin verir. Bu model, bir sýnýfýn somutlaþtýrmayý alt sýnýflara ertelemesine izin verir.
-### Prototype
-- Prototip tasarým deseni, prototipik bir örnek kullanarak oluþturulacak nesne türlerini ve bu prototipi kopyalayarak yeni nesneler oluþturmayý belirtir.
-### Singleton
-- Singleton tasarým deseni, bir sýnýfýn yalnýzca bir örneðe sahip olmasýný saðlar ve buna global bir eriþim noktasý saðlar.
-#### Abstract Factory vs Builder
-- Builder þablonu karmaþýk bir nesneyi adým adým oluþturmaya odaklanýr. Abstract Factory þablonu ise benzer ürün ailelerini karmaþýk veya basit farketmeksizin oluþturmak için kullanýlýr
-- Builder þablonu ürünü son adýmda kullanýcýya teslim ederken Abstract Factory þablonu anýnda ürünü verir.
-#### Abstract Factory vs Factory Method
-- Fabrika olarak düþünürsek, Factory DP sadece tek bir ürünün üretildiði fabrika, Abstract Factory DP ise farklý farklý ürünlerin üretildiði fabrika olarak düþünebiliriz.
+## Structural Design Patterns
+### Adapter
+- The Adapter design pattern converts the interface of a class into another interface clients expect. This design pattern lets classes work together that couldn‘t otherwise because of incompatible interfaces.
+### Bridge
+- The Bridge design pattern decouples an abstraction from its implementation so that the two can vary independently.
+### Composite
+- The Composite design pattern composes objects into tree structures to represent part-whole hierarchies. This pattern lets clients treat individual objects and compositions of objects uniformly.ndently.
+### Decorator
+- The Decorator design pattern attaches additional responsibilities to an object dynamically. This pattern provide a flexible alternative to subclassing for extending functionality.
+### Facade
+- The Facade design pattern provides a unified interface to a set of interfaces in a subsystem. This pattern defines a higher-level interface that makes the subsystem easier to use.
+### Flyweight
+- The Flyweight design pattern uses sharing to support large numbers of fine-grained objects efficiently.
+### Proxy
+- The Proxy design pattern provides a surrogate or placeholder for another object to control access to it.
