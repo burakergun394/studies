@@ -18,7 +18,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Use((context, next) =>
+{
+    context.Request.EnableBuffering();
+    return next(context);
+});
+
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseMiddleware<RequestHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
