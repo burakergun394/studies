@@ -26,6 +26,7 @@ app.Use((context, next) =>
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 app.UseMiddleware<RequestHandlerMiddleware>();
+app.UseMiddleware<ResponseHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 

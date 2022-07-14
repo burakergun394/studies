@@ -15,7 +15,7 @@ namespace Middlewares.Controllers
             if (id == 0)
                 throw new AppException("Value cannot be zero");
 
-            return Ok(id);
+            return Ok($"response - {id}");
         }
 
         [HttpPost]
@@ -25,7 +25,7 @@ namespace Middlewares.Controllers
             if (id == 0)
                 throw new AppException("Value cannot be zero");
 
-            return Ok(id);
+            return Ok($"response - {id}");
         }
     }
 }
