@@ -8,12 +8,21 @@ namespace API.Controllers
     [ApiController]
     public class TestsController : ControllerBase
     {
+        private readonly ILogger<TestsController> _logger;
+
+        public TestsController(ILogger<TestsController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet]
         [Route("get-by-id")]
         public IActionResult GetById([FromQuery] int id)
         {
             if (id == 0)
                 throw new AppException("Value cannot be zero");
+
+            _logger.LogError(id.ToString());
 
             return Ok($"response - {id}");
         }

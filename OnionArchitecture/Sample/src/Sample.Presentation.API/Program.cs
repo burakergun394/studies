@@ -1,23 +1,27 @@
-using Core.Middlewares;
-using Serilog;
+using Sample.Application.Common.Interfaces.Initializer;
+using Sample.Infrastructure.DependencyResolvers.Microsoft;
+using Sample.Persistence.DependencyResolvers.Microsoft;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Host
-    .UseSerilog((context, loggerConfiguration) =>
-    {
-        loggerConfiguration.ReadFrom.Configuration(context.Configuration);
-        loggerConfiguration.WriteTo.Seq("http://localhost:5341");
-    });
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.DependencyResolveForPersistenceLayer();
+builder.Services.DependencyResolveForInfrastructureLayer();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var seedInitializer = scope.ServiceProvider.GetRequiredService<ISeedInitializer>();
+    await seedInitializer.SeedAsync();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -25,16 +29,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.Use((context, next) =>
-{
-    context.Request.EnableBuffering();
-    return next(context);
-});
-
-app.UseMiddleware<ErrorHandlerMiddleware>();
-app.UseMiddleware<RequestHandlerMiddleware>();
-app.UseMiddleware<ResponseHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
